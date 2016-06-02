@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	</head>
+	<body>
+		<ul>
+    	{{range .Messages}}
+    		<li>{{.}}</li>
+    	{{end}}
+    	</ul>
+		<form method="post">
+			username: <input type="text" name="username"><br>
+			Password: <input type="password" name="password">
+			<input type="submit" value="Submit">
+		</form>
+	</body>
+</html>

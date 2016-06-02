@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+		<script type="application/javascript">
+			var iosDevices = new Array();
+			var androidDevices = new Array();
+			$(function(){
+				$.ajax({
+					url:"/push/devices",
+					dataType:"json",
+					success:function(data){
+						if (data.Iosdevices !== null){
+							iosDevices = data.Iosdevices;
+						}
+						if (data.Androiddevices !== null){
+							androidDevices = data.Androiddevices;	
+						}
+						console.log(androidDevices.length)
+						console.log(iosDevices.length)
+					}
+				});
+				$('#submit').click(function(){
+					var platformsChecked = $('input:checked');
+					var message = $('#message').val();
+					$('#submit').attr("disabled","disabled");
+					var platforms = [];
+					for (var platform = 0;totalplatforms = platformsChecked.length,platform<totalplatforms;platform++){
+						if (platformsChecked[platform].value === "ios" || platformsChecked[platform].value === "android"){
+							platforms.push(platformsChecked[platform].value);
+
+						}
+						console.log(platforms);
+					}
+					if (platforms.indexOf("ios") !== -1){
+						for (var i = 0 ;totalIos = iosDevices.length, i<totalIos;i++){
+							$.ajax({
+								url:"/push/device/ios",
+								dataType:"json",
+								data:{
+									"deviceid":iosDevices[i],
+									"message": message
+								},
+								type:"POST",
+								success:function(data){
+									console.log(data)
+								}
+							});
+						}
+					}
+					if (platforms.indexOf("android") != -1){
+						for (var i = 0 ;totalAndroid = androidDevices.length, i<totalAndroid;i++){
+							console.log("android"+i);
+							$.ajax({
+								url:"/push/device/android",
+								dataType:"json",
+								data:{
+									"deviceid":androidDevices[i],
+									"message": message
+								},
+								type:"POST",
+								success:function(data){
+									console.log(data)
+								}
+							});
+						}
+					}
+				});
+			});
+		</script>
+	</head>
+	<body>
+		<form>
+			Limit for message is 256 characters.<br/>
+			<textarea id="message"rows="4" cols="50">Insert Text here.</textarea><br>
+			<input type="checkbox" name="device" value="android">Android<br>
+			<input type="checkbox" name="device" value="ios">iOS <br>
+			<button type="button" id="submit" >Submit</button>
+		</form>
+	</body>
+</html>

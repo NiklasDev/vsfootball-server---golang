@@ -1,0 +1,9 @@
+Who call "innerCreateGameTurn" from models?
+	- FacebookInviteToGame
+	- Rematch
+	- CreateGame(call twice)
+
+Who call above from controllers
+	-HandleCreateGame ->CreateGame
+	-HandleFacebookGameInvite->FacebookInviteToGame
+	-HandleRematch->Rematch

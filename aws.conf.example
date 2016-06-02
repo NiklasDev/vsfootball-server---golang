@@ -1,0 +1,10 @@
+{
+          "aws_access_key": "",
+          "aws_secret_key": "",
+          "dbusername"    : "root",
+          "dbport"        : "8889",
+          "dbpassword"    : "root",
+          "serverlocation": "vsf001.engagemobile.com/",
+          "dbaddress"	  : "vsfdev001.engagemobile.com",
+          "node_name"	  : "Ravi's Laptop"
+}
